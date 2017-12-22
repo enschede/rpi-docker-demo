@@ -24,14 +24,10 @@ services:
       update_config:
         parallelism: 1
         delay: 15s
-#      placement:
-#        constraints:
-#          - node.role == worker
-      replicas: 1
-#      labels:
-#      - traefik.docker.network=traefik-net
-#      - traefik.port=8080
-#      - traefik.enable=true
+      placement:
+        constraints:
+          - node.role == worker
+      replicas: 5
     networks:
       - default
 
