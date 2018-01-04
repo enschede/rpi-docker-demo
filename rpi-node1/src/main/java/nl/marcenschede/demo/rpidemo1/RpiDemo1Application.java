@@ -21,7 +21,7 @@ public class RpiDemo1Application {
 
         RestTemplate restTemplate = new RestTemplate();
 
-        final ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://demo2:8080/upper", name, String.class);
+        final ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://node2:8080/upper", name, String.class);
         final String body = responseEntity.getBody();
 
         return String.format("Hello %s%n", body);

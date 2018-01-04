@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>nl.marcenschede.demo</groupId>
-	<artifactId>rpi-demo1</artifactId>
+	<artifactId>rpi-node1</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>rpi-demo1</name>
+	<name>rpi-node1</name>
 	<description>Demo project for RPI stack</description>
 
 	<parent>
@@ -57,7 +57,7 @@
 							<goal>build</goal>
 						</goals>
 						<configuration>
-							<imageName>enschede/docker-demo1</imageName>
+							<imageName>enschede/docker-node1</imageName>
 							<baseImage>java:openjdk-8-jdk</baseImage>
 							<imageTags>
 								<imageTag>${project.version}</imageTag>
@@ -84,7 +84,7 @@
 							<goal>build</goal>
 						</goals>
 						<configuration>
-							<imageName>enschede/docker-demo1-rpi</imageName>
+							<imageName>enschede/docker-node1-rpi</imageName>
 							<baseImage>hypriot/rpi-java</baseImage>
 							<imageTags>
 								<imageTag>${project.version}</imageTag>

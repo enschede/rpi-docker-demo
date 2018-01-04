@@ -1,15 +1,18 @@
 version: '3'
 
+# Starten:
+# 1. docker stack deploy -c docker-compose.yaml demo
+
 services:
-  demo1:
-    image: enschede/docker-demo1:0.0.1-SNAPSHOT
+  node1:
+    image: enschede/docker-node1:0.0.1-SNAPSHOT
     deploy:
       update_config:
         parallelism: 1
         delay: 15s
-#      placement:
-#        constraints:
-#          - node.role == worker
+      placement:
+        constraints:
+          - node.role == worker
       replicas: 1
       labels:
       - traefik.docker.network=traefik-net
@@ -18,8 +21,8 @@ services:
     networks:
       - default
       - traefik-net
-  demo2:
-    image: enschede/docker-demo2:0.0.1-SNAPSHOT
+  node2:
+    image: enschede/docker-node2:0.0.1-SNAPSHOT
     deploy:
       update_config:
         parallelism: 1
@@ -27,7 +30,7 @@ services:
       placement:
         constraints:
           - node.role == worker
-      replicas: 5
+      replicas: 1
     networks:
       - default
 

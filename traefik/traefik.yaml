@@ -1,0 +1,28 @@
+version: '3.3'
+
+# Starten:
+# 1. docker network create --driver overlay traefik-net
+# 2. docker stack deploy -c traefik.yaml traefik
+
+services:
+  traefik:
+    image: traefik
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+    command: --web --docker --docker.swarmmode --docker.watch --docker.domain=docker.localhost --logLevel=DEBUG
+    ports:
+      - "80:80"
+      - "8080:8080"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /dev/null:/traefik.toml
+    networks:
+      - traefik-net
+
+networks:
+  traefik-net:
+#    driver: overlay
+    external: true
