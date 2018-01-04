@@ -4,9 +4,9 @@ version: '3.3'
 # 1. docker network create --driver overlay traefik-net
 # 2. docker stack deploy -c traefik.yaml traefik
 
-configs:
-  traefik_toml:
-    file: ./traefik.toml
+#configs:
+#  traefik_toml:
+#    file: ./traefik.toml
 
 services:
   traefik:
@@ -15,21 +15,19 @@ services:
       placement:
         constraints:
           - node.role == manager
-    command: --web --docker --docker.swarmmode --docker.watch --docker.domain=docker.localhost --logLevel=DEBUG
-    configs:
-      - source: traefik_toml
-        target: /etc/traefik/traefik.toml
+    command: --web --docker --docker.swarmmode --docker.watch --docker.domain=marcenschede.nl --logLevel=DEBUG
+#    configs:
+#      - source: traefik_toml
+#        target: /traefik.toml
     ports:
       - "80:80"
       - "8080:8080"
       - "443:443"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /dev/null:/traefik.toml
     networks:
       - traefik-net
 
 networks:
   traefik-net:
-#    driver: overlay
     external: true
