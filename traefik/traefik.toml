@@ -8,10 +8,14 @@ defaultEntryPoints = ["http"]
 #  address = ":443"
 #    [entryPoints.https.tls]
 #      [[entryPoints.https.tls.certificates]]
-#      certFile = "/home/user/traefik/ssl/ca1.crt"
-#      keyFile = "/home/user/traefik/ssl/ca1.key"
+#      certFile = "/ssl/server.pem"
+#      keyFile = "/ssl/server-key.pem"
+
 [web]
 address = ":8080"
+certFile = "/ssl/server.pem"
+keyFile = "/ssl/server-key.pem"
+
 [docker]
 endpoint = "unix:///var/run/docker.sock"
 domain = "marcenschede.nl"
