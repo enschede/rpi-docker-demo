@@ -4,9 +4,15 @@ version: '3.3'
 # 1. docker network create --driver overlay traefik-net
 # 2. docker stack deploy -c traefik.yaml traefik
 
-#configs:
-#  traefik_toml:
-#    file: ./traefik.toml
+configs:
+  toml:
+    file: ./traefik.toml
+  ca_cert:
+    file: ./ca.cert.pem
+  traefik_cert:
+    file: ./localhost.crt.pem
+  traefik_key:
+    file: ./localhost.key.pem
 
 services:
   traefik:
@@ -15,16 +21,45 @@ services:
       placement:
         constraints:
           - node.role == manager
-    command: --web --docker --docker.swarmmode --docker.watch --docker.domain=marcenschede.nl --logLevel=DEBUG
-#    configs:
-#      - source: traefik_toml
-#        target: /traefik.toml
+#    command: |
+#      --web
+#      --docker
+#      --docker.swarmmode
+#      --docker.watch
+#      --docker.domain=marcenschede.nl
+#      --web.certfile=/ssl/server.pem
+#      --web.keyfile=/ssl/server-key.pem
+#      --docker.tls=true
+#      --docker.tls.cert=/ssl/server.pem
+#      --docker.tls.key=/ssl/server-key.pem
+#      --docker.tls.ca=/ssl/ssms_ca_cert.pem
+#      --docker.tls.insecureskipverify
+#      --logLevel=DEBUG
+#    command: |
+#      --web
+#      --docker
+#      --docker.swarmmode
+#      --docker.watch
+#      --docker.domain=marcenschede.nl
+#      --web.certfile=/ssl/server.pem
+#      --web.keyfile=/ssl/server-key.pem
+#      --logLevel=DEBUG
+    configs:
+      - source: toml
+        target: /etc/traefik/traefik.toml
+      - source: ca_cert
+        target: /ssl/ca.pem
+      - source: traefik_cert
+        target: /ssl/server.pem
+      - source: traefik_key
+        target: /ssl/server-key.pem
     ports:
       - "80:80"
       - "8080:8080"
       - "443:443"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - /dev/null:/traefik.toml
     networks:
       - traefik-net
 

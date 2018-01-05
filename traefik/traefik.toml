@@ -1,0 +1,20 @@
+logLevel = "DEBUG"
+
+defaultEntryPoints = ["http"]
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+#  [entryPoints.https]
+#  address = ":443"
+#    [entryPoints.https.tls]
+#      [[entryPoints.https.tls.certificates]]
+#      certFile = "/home/user/traefik/ssl/ca1.crt"
+#      keyFile = "/home/user/traefik/ssl/ca1.key"
+[web]
+address = ":8080"
+[docker]
+endpoint = "unix:///var/run/docker.sock"
+domain = "marcenschede.nl"
+watch = true
+swarmmode = true
+exposedbydefault = false
