@@ -14,7 +14,7 @@ public class RpiDemo2Application {
 
 	@PostMapping("/upper")
 	public String helloGet(@RequestBody String name) {
-		return "Blabla :" + name.toLowerCase();
+		return name.toLowerCase();
 	}
 
 }
