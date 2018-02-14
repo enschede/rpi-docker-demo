@@ -1,32 +1,32 @@
 version: '3.3'
 
 services:
-  demo1:
-    image: enschede/docker-demo1
+  node1:
+    image: enschede/docker-node1:0.0.1-SNAPSHOT
     deploy:
       placement:
         constraints:
           - node.role == worker
       replicas: 1
-      resources:
-        limits:
-          cpus: "1"
-          memory: 1G
+#      resources:
+#        limits:
+#          cpus: "1"
+#          memory: 1G
       restart_policy:
         condition: on-failure
     ports:
       - "8081:8080"
 
-  demo2:
-    image: enschede/docker-demo2
+  node2:
+    image: enschede/docker-node2:0.0.1-SNAPSHOT
     deploy:
       placement:
         constraints:
           - node.role == worker
       replicas: 1
-      resources:
-        limits:
-          cpus: "1"
-          memory: 1G
+#      resources:
+#        limits:
+#          cpus: "1"
+#          memory: 1G
       restart_policy:
         condition: on-failure

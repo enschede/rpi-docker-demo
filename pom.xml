@@ -12,8 +12,8 @@
 	<description>Demo project for RPI stack</description>
 
 	<modules>
-		<module>rpi-demo1</module>
-		<module>rpi-demo2</module>
+		<module>rpi-node1</module>
+		<module>rpi-node2</module>
 	</modules>
 
 </project>
