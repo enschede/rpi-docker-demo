@@ -1,0 +1,45 @@
+version: '3.3'
+
+# Starten:
+# 1. docker network create --driver overlay traefik-net
+# 2. docker stack deploy -c traefik.yaml traefik
+
+configs:
+  toml:
+    file: ./traefik.toml
+  ca_cert:
+    file: ./ca.cert.pem
+  traefik_cert:
+    file: ./localhost.crt.pem
+  traefik_key:
+    file: ./localhost.key.pem
+
+services:
+  traefik:
+    image: traefik
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+    configs:
+      - source: toml
+        target: /etc/traefik/traefik.toml
+      - source: ca_cert
+        target: /ssl/ca.pem
+      - source: traefik_cert
+        target: /ssl/server.pem
+      - source: traefik_key
+        target: /ssl/server-key.pem
+    ports:
+      - "80:80"
+      - "8080:8080"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /dev/null:/traefik.toml
+    networks:
+      - traefik-net
+
+networks:
+  traefik-net:
+    external: true

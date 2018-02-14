@@ -1,4 +1,4 @@
-package nl.marcenschede.demo.rpinode2;
+package nl.marcenschede.demo.rpidemo1;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class RpiNode2ApplicationTests {
+public class RpiDemo1ApplicationTests {
 
 	@Test
 	public void contextLoads() {

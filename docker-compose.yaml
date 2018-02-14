@@ -1,30 +1,41 @@
-version: '3.3'
+version: '3'
+
+# Starten:
+# 1. docker stack deploy -c docker-compose.yaml demo
 
 services:
   node1:
     image: enschede/docker-node1:0.0.1-SNAPSHOT
     deploy:
-      placement:
-        constraints:
-          - node.role == worker
-      replicas: 2
       update_config:
         parallelism: 1
         delay: 15s
-      restart_policy:
-        condition: on-failure
-    ports:
-      - "8081:8080"
-
+      placement:
+        constraints:
+          - node.role == worker
+      replicas: 1
+      labels:
+      - traefik.docker.network=traefik-net
+      - traefik.port=8080
+      - traefik.enable=true
+    networks:
+      - default
+      - traefik-net
   node2:
     image: enschede/docker-node2:0.0.1-SNAPSHOT
     deploy:
-      placement:
-        constraints:
-          - node.role == worker
-      replicas: 5
       update_config:
         parallelism: 1
         delay: 15s
-      restart_policy:
-        condition: on-failure
+      placement:
+        constraints:
+          - node.role == worker
+      replicas: 1
+    networks:
+      - default
+
+networks:
+  default:
+    driver: overlay
+  traefik-net:
+    external: true

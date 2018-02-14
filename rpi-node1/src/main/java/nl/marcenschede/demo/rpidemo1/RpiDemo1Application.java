@@ -1,4 +1,4 @@
-package nl.marcenschede.demo.rpinode1;
+package nl.marcenschede.demo.rpidemo1;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,10 +10,10 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @RestController
-public class RpiNode1Application {
+public class RpiDemo1Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RpiNode1Application.class, args);
+		SpringApplication.run(RpiDemo1Application.class, args);
 	}
 
 	@GetMapping("/hello/{name}")

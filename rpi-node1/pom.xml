@@ -77,6 +77,33 @@
 							</exposes>
 						</configuration>
 					</execution>
+					<execution>
+						<id>rpi</id>
+						<phase>install</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+						<configuration>
+							<imageName>enschede/docker-node1-rpi</imageName>
+							<baseImage>hypriot/rpi-java</baseImage>
+							<imageTags>
+								<imageTag>${project.version}</imageTag>
+							</imageTags>
+							<entryPoint>
+								["java","-Djava.security.egd=file:/dev/./urandom","-jar","/${project.build.finalName}.jar"]
+							</entryPoint>
+							<resources>
+								<resource>
+									<targetPath>/</targetPath>
+									<directory>${project.build.directory}</directory>
+									<include>${project.build.finalName}.jar</include>
+								</resource>
+							</resources>
+							<exposes>
+								<expose>8080</expose>
+							</exposes>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 		</plugins>
