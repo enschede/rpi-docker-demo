@@ -7,11 +7,10 @@ services:
       placement:
         constraints:
           - node.role == worker
-      replicas: 1
-#      resources:
-#        limits:
-#          cpus: "1"
-#          memory: 1G
+      replicas: 2
+      update_config:
+        parallelism: 1
+        delay: 15s
       restart_policy:
         condition: on-failure
     ports:
@@ -23,10 +22,9 @@ services:
       placement:
         constraints:
           - node.role == worker
-      replicas: 1
-#      resources:
-#        limits:
-#          cpus: "1"
-#          memory: 1G
+      replicas: 5
+      update_config:
+        parallelism: 1
+        delay: 15s
       restart_policy:
         condition: on-failure
