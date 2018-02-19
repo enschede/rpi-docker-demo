@@ -1,7 +1,8 @@
 version: '3'
 
 # Starten:
-# 1. docker stack deploy -c docker-compose.yaml demo
+# 2. docker network create -d overlay my-overlay
+# 1. docker stack deploy -c docker-compose.yaml demo1
 
 services:
   node1:
